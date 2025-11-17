@@ -5,17 +5,21 @@ const errorHandler = require("./middlewares/error-handler")
 const notFound = require("./middlewares/not-found")
 
 
+
 const PORT = 8000
 
 // DATABASE 
 const connectDb = require("./db/connect")
 
 
-app.use(express.json())
+app.use(express.json()) // Content-Type: application/json
 
-// app.use('/api/v1', require("./routes)
 
 // ROUTES
+const authRoute = require("./routers/auth-route")
+const jobRoute = require("./routers/job-route")
+app.use("/api/v1/auth", authRoute)
+app.use("/api/v1/jobs", jobRoute)
 
 
 
