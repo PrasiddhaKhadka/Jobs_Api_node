@@ -1,9 +1,12 @@
 ## Task 
 1. Auth 
-``Validation using moongose
-HashPassword (brcyptjs)
-Create Token
-Send response with token``
+``Register``
+- Validate the user.body
+- HashPassword (brcyptjs)
+- Save User
+- Generate Token
+- Send Response with Token
+
 
 2. Mongoose Error
 - Required
