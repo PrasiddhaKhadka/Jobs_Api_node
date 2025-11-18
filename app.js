@@ -4,7 +4,7 @@ const app = express()
 const errorHandler = require("./middlewares/error-handler")
 const notFound = require("./middlewares/not-found")
 
-const authenticateUser = require("./middlewares/authentication")
+const authenticationMiddleWare = require("./middlewares/authentication")
 
 
 
@@ -21,7 +21,7 @@ app.use(express.json()) // Content-Type: application/json
 const authRoute = require("./routers/auth-route")
 const jobRoute = require("./routers/job-route")
 app.use("/api/v1/auth", authRoute)
-app.use("/api/v1/jobs",authenticateUser, jobRoute)
+app.use("/api/v1/jobs",authenticationMiddleWare, jobRoute)
 
 
 

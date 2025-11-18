@@ -11,6 +11,7 @@ if(!authHeader || !authHeader.startsWith('Bearer')){
 
 const token = authHeader.split(' ')[1];
 try {
+    console.log(token)
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     // attach the user to the job routes
     req.user = {userId: payload.userId, name: payload.name}
@@ -20,6 +21,7 @@ try {
     next()
 
 } catch (error) {
+    console.log(error)
     throw new UnauthorizedError('Authentication Invalid')
 }
 

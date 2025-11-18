@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const JobsSchema = mongoose.Model({
+const JobsSchema = mongoose.Schema({
     company:{
         type: String,
         required:[true,'Please enter the company name'],

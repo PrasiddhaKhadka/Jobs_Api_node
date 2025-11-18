@@ -1,6 +1,7 @@
 class CustomApiError extends Error {
-    constructor(message) {
-        this.message = message
+    constructor(message,statusCode) {
+        super(message);
+         this.statusCode = statusCode;
     }
 }    
 
