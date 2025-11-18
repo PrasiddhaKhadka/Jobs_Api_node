@@ -1,22 +1,22 @@
 const getAllJobs = async(req,res)=>{
-    res.send("getAllJobs")    
+    res.json("getAllJobs")    
 }
 
 
 const getJob = async(req,res)=>{
-    res.send("getJob")
+    res.json("getJob")
 }
 
 const createJob = async(req,res)=>{
-    res.send("createJob")
+    res.json(req.user)
 }
 
 const updateJob = async(req,res)=>{
-    res.send("updateJob")
+    res.json("updateJob")
 }
 
 const deleteJob = async(req,res)=>{
-    res.send("deleteJob")
+    res.json("deleteJob")
 }
 
 
