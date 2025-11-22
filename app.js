@@ -1,43 +1,40 @@
 require('dotenv').config()
-const express = require("express")
-const app = express()
-const errorHandler = require("./middlewares/error-handler")
-const notFound = require("./middlewares/not-found")
+const express = require('express')
+const app  = express()
 
-const authenticationMiddleWare = require("./middlewares/authentication")
-
-
-
-const PORT = 8000
-
-// DATABASE 
-const connectDb = require("./db/connect")
+// MIDDLEWARES
+const errorHandler =  require('./middlewares/error-handler')
+const notFound = require('./middlewares/not-found')
+const authenticationMiddleware = require('./middlewares/authentication')
 
 
-app.use(express.json()) // Content-Type: application/json
+// DATABASE CONNECTION
+const connectDb = require('./db/connection_db')
+
+app.use(express.json())
+
+const authRouter = require('./routes/auth-routes')
+app.use('/api/v1/auth', authRouter)
+
+const jobRouter = require('./routes/job-routes')
+app.use('/api/v1/jobs', authenticationMiddleware,jobRouter)
 
 
-// ROUTES
-const authRoute = require("./routers/auth-route")
-const jobRoute = require("./routers/job-route")
-app.use("/api/v1/auth", authRoute)
-app.use("/api/v1/jobs",authenticationMiddleWare, jobRoute)
-
-
-
-// MIDDLEWARE
-app.use(errorHandler)
+// MIDDLEWARES
 app.use(notFound)
+app.use(errorHandler)
 
-
-
-const startApp = async()=>{
+const startApp=async()=>{
     try {
-        await connectDb(process.env.MONGO_URI)
-        app.listen(PORT,()=>console.log(`Server listening on port ${PORT}`))
+         await connectDb(process.env.MONGODB_URI)
+
+        app.listen(8000,()=>{
+            console.log('Server is running')
+        })
     } catch (error) {
-        console.error(error)
+        console.log(error)
     }
 }
+
 
 startApp()

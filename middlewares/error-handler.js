@@ -1,14 +1,14 @@
-const { StatusCodes } = require("http-status-codes")
-const { CustomApiError } = require("../errors")
+const { CustomApiError } = require("../error/index")
+const { StatusCodes } =  require("http-status-codes")
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = async(err, req,res,next)=>{
     if(err instanceof CustomApiError){
-        res.status(err.statusCode).send(err.message)
+        return res.status(err.statusCode).json({
+            msg:err.message
+        })
     }else{
-        console.log('hehehe')
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message)
+       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err.message)
     }
-
 }
 
-module.exports = errorHandler
+module.exports = errorHandler;
